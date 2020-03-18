@@ -2,29 +2,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+
+public enum ProductType
+{
+    ToiletRoll,
+    Can,
+    Pasta,
+    Invalid
+}
 
 public class Product : MonoBehaviour
 {
-    enum ProductType
-    {
-        ToiletRoll,
-        Can,
-        Pasta,
-        Invalid
-    }
-
+    //TODO: remove serializable as products won´t be instanced in level, only through ProductSpawns
     [SerializeField]
-    ProductType productType;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        foreach (var touch in Input.touches)
-        {
-            
-        }
-    }
+    public ProductType productType;
 
     // Update is called once per frame
     void Update()
