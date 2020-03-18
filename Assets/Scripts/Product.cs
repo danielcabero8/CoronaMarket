@@ -13,8 +13,7 @@ public enum ProductType
 
 public class Product : MonoBehaviour
 {
-    //TODO: remove serializable as products won´t be instanced in level, only through ProductSpawns
-    [SerializeField]
+    //TODO: Make it non serializeable as products won´t be instanced in level, only through ProductSpawns
     public ProductType productType;
 
     // Update is called once per frame

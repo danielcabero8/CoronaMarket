@@ -37,7 +37,7 @@ public class TouchMotion : MonoBehaviour
                 rigidBody.velocity = new Vector2();
             }
 
-            rigidBody.AddForce(forceUnit * 3);
+            rigidBody.AddForce(forceUnit * 6);
         }
     }
 }
