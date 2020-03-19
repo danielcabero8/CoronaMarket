@@ -4,11 +4,12 @@ using UnityEngine;
 
 public struct SShelfData
 {
-    int RareChance;
+    public int RareChance;
 }
 
 public class Shelf : MonoBehaviour
 {
+    public ProductCollection productCollection;
     private SShelfData shelfData;
 
     public void InitializeShelf(SShelfData shelfDataIn)
@@ -29,22 +30,21 @@ public class Shelf : MonoBehaviour
         //Set spawn position for this product
         Transform spawnTransform = productSpawn.transform;
         newProduct.transform.position = spawnTransform.position;
-        newProduct.transform.rotation = spawnTransform.rotation;
+        //newProduct.transform.rotation = spawnTransform.rotation;
 
         //Initailize product component
-        Product product = newProduct.GetComponent<Product>();
+        /*Product product = newProduct.GetComponent<Product>();
         if(product)
         {
             product.productType = productSpawn.productType;
-        }
+        }*/
     }
  
     private GameObject CreateProductObjectForSpawn(ProductSpawn product)
     {
         //TODO: Run rarity algorithm
-        //TODO: Hook data asset with prefabs
-        //TODO: Instantiate object for the prefab
-        GameObject newGameObject = new GameObject();
-        return newGameObject;
+        GameObject newProductTemplate = productCollection.collection[product.productType];
+        GameObject newProduct = Instantiate<GameObject>(newProductTemplate);
+        return newProduct;
     }
 }

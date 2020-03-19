@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &8373035659984951366
+--- !u!1001 &2079255478495038620
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -15,7 +15,7 @@ PrefabInstance:
     - target: {fileID: 3169348138823977498, guid: 5de0417074c83c944a9d800043de95a7,
         type: 3}
       propertyPath: productType
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3211450407282865958, guid: 5de0417074c83c944a9d800043de95a7,
         type: 3}
@@ -25,27 +25,27 @@ PrefabInstance:
     - target: {fileID: 3309524395884642518, guid: 5de0417074c83c944a9d800043de95a7,
         type: 3}
       propertyPath: productType
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3725391820380316876, guid: 5de0417074c83c944a9d800043de95a7,
         type: 3}
       propertyPath: productType
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7683678011598815202, guid: 5de0417074c83c944a9d800043de95a7,
         type: 3}
       propertyPath: m_Name
-      value: Shelf_Rolls
+      value: ShelfMix
       objectReference: {fileID: 0}
     - target: {fileID: 7683678011598815204, guid: 5de0417074c83c944a9d800043de95a7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.16
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7683678011598815204, guid: 5de0417074c83c944a9d800043de95a7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.47
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7683678011598815204, guid: 5de0417074c83c944a9d800043de95a7,
         type: 3}

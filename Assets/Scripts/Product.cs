@@ -37,6 +37,17 @@ public class Product : MonoBehaviour
     public void OnButtonClicked()
     {
         //When item gets clicked, we activate it´s physics
+        ActivateGravity();  
+    }
+
+    void OnCollisionEnter2D(Collision2D collision2D)
+    {
+        //When item collides with any other object
+        ActivateGravity();      
+    }
+
+    void ActivateGravity()
+    {
         Rigidbody2D rigidBody2D = GetComponent<Rigidbody2D>();
         if(rigidBody2D)
         {
