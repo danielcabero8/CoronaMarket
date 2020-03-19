@@ -17,3 +17,4 @@ MonoBehaviour:
   shelves:
   - {fileID: 2203130906922149796, guid: 8429c0af770e36b428a270b6e7d016c1, type: 3}
   - {fileID: 8537443522241426302, guid: 9a2520f149d9aed40914c313833bda72, type: 3}
+  - {fileID: 6627635569232728646, guid: e405c3b05bb8ab9488fc16f2e1c12f83, type: 3}
