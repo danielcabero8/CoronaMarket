@@ -16,8 +16,8 @@ public class LevelManager : MonoBehaviour
         
     }
 
-    void OnProductCollected(GameObject gameObject)
+    void OnProductCollected(Product product)
     {
-        Object.Destroy(gameObject);
+        Object.Destroy(product.gameObject);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Cart : MonoBehaviour
 {
-    public delegate void OnProductCollected(GameObject gameObject);
+    public delegate void OnProductCollected(Product gameObject);
     public static event OnProductCollected ProductCollected;
 
     void OnTriggerEnter2D(Collider2D other)
@@ -12,7 +12,7 @@ public class Cart : MonoBehaviour
         Product product = other.GetComponent<Product>();
         if(product)
         {
-            ProductCollected(other.gameObject);
+            ProductCollected(product);
         }
     }
 }
