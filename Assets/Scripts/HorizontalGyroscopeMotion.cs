@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HorizontalGyroscopeMotion : MonoBehaviour
 {
-    [Header("Logic")]
+    /*[Header("Logic")]
     private Gyroscope gyroscope;
     private Quaternion phoneRotation;
     private Vector3 gyroscopeRrotationRate;
@@ -61,7 +61,7 @@ public class HorizontalGyroscopeMotion : MonoBehaviour
 
         if(gyroscopeActive)
         {
-           /* Input.acceleration
+            Input.acceleration
             Vector3 CurrentRotationRate = GetCurrentRotationRate();
             Vector3 CurrentPosition = transform.position;
             CurrentPosition.x = CurrentRotationRate.x;
@@ -76,8 +76,29 @@ public class HorizontalGyroscopeMotion : MonoBehaviour
             Quaternion.FromToRotation(referenceRotation * Vector3.forward, deviceRotation * Vector3.forward));
 
             Quaternion rotationZ = eliminationOfXY * deviceRotation;
-            float roll = rotationZ.eulerAngles.z;*/
+            float roll = rotationZ.eulerAngles.z;
         }
 
+    }*/
+
+    private float AccX;
+    private Rigidbody2D rigidBody2D;
+
+    private void Start()
+    {
+        rigidBody2D = GetComponent<Rigidbody2D>();
+    }
+
+    private void FixedUpdate()
+    {
+        AccX = Input.acceleration.x * 0.5f;
+    }
+
+    private void Update()
+    {
+        if(rigidBody2D)
+        {
+            rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x + AccX, rigidBody2D.velocity.y);
+        }
     }
 }
