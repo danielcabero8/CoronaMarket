@@ -19,19 +19,29 @@ public class Product : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(HasProductBeenClicked())
+        if(HasProductBeenTouched() || HasProductBeenClicked())
         {
             OnButtonClicked();
         }    
     }
 
-    bool HasProductBeenClicked()
+    bool HasProductBeenTouched()
     {
         Collider2D collider = GetComponent<Collider2D>();
         return Array.Exists(Input.touches, (touch) =>
         {
             return collider.OverlapPoint(Camera.main.ScreenToWorldPoint(touch.position));
         });
+    }
+
+    bool HasProductBeenClicked()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            Collider2D collider = GetComponent<Collider2D>();
+            return collider.OverlapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        }
+       return false;
     }
 
     public void OnButtonClicked()

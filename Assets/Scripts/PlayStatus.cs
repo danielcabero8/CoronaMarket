@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum LevelState
 {
@@ -14,38 +15,71 @@ public class PlayStatus : MonoBehaviour
     private LevelState levelState;
 
     /*Game state variables - START*/
-    private int health = 0;
-    private int time = 0;
-    private int rolls = 0;
+    public int health { get; private set; } = 0;
+    public int time { get; private set; } = 0;
+    public int rolls { get; private set; } = 0;
     /*Game state variables - END*/
 
-   private static PlayStatus playStatusInstance;
+    private float currentGameTime;
 
-    void Start()
+    public delegate void OnLevelStateChanged(LevelState oldState, LevelState newState);
+    public static event OnLevelStateChanged LevelStateChanged;
+
+    private static PlayStatus playStatusInstance;
+
+    private void Start()
     {
         //If there is already a GameStatus object, delete the new instance
         if(playStatusInstance != null)
         {
-            //but first override level state so that we know when we are going from frontend to game and viceversa
-            playStatusInstance.levelState = levelState;
+            //but first check if we have changed states
+            if(playStatusInstance.levelState != levelState)
+            {
+                if(LevelStateChanged != null)
+                {
+                    LevelStateChanged(playStatusInstance.levelState, levelState);
+                }
+
+                //Set the new state
+                playStatusInstance.levelState = levelState;
+            }
+
 
             Destroy(this.gameObject);
-            return;
         }
+        else
+        {
+            playStatusInstance = this; //set singleton instance to this
+            DontDestroyOnLoad(this.gameObject); //do we really need this? no harm yet
 
-        playStatusInstance = this; //set singleton instance to this
-        DontDestroyOnLoad(this.gameObject); //do we really need this? no harm yet
-
-        InitCallbacks();
-        LoadPlayState();
+            InitCallbacks();
+            LoadPlayState();
+        } 
+    }
+    private void Update()
+    {
+        if(levelState == LevelState.Play)
+        {
+            currentGameTime += Time.deltaTime;
+            if(currentGameTime >= time)
+            {
+                EndPlay();
+                currentGameTime = 0.0f;
+            }
+        }
     }
 
-    void InitCallbacks()
+    private void EndPlay()
+    {
+        SceneManager.LoadScene("Frontend");
+    }
+
+    private void InitCallbacks()
     {
         Cart.ProductCollected += OnProductCollected;
     }
     
-    void OnProductCollected(Product product)
+    private void OnProductCollected(Product product)
     {
         switch (product.productType)
         {
@@ -69,23 +103,25 @@ public class PlayStatus : MonoBehaviour
         }
     }
 
-    void SavePlayState()
+    private void SavePlayState()
     {
-        PlayerPrefs.GetInt("health", health);
-        PlayerPrefs.GetInt("time", time);
-        PlayerPrefs.GetInt("rolls", rolls);
+        PlayerPrefs.SetInt("play_health", health);
+        PlayerPrefs.SetInt("play_time", time);
+        PlayerPrefs.SetInt("play_rolls", rolls);
     }
 
-    void LoadPlayState()
+    private void LoadPlayState()
     {
-        health = PlayerPrefs.GetInt("health", 0);
-        time = PlayerPrefs.GetInt("time", 30);
-        time = PlayerPrefs.GetInt("rolls", 0);
+        health = PlayerPrefs.GetInt("play_health", 0);
+        time = PlayerPrefs.GetInt("play_time", 30);
+        rolls = PlayerPrefs.GetInt("play_rolls", 0);
     }
 
-    void ResetPlayState()
+    public void ResetPlayState()
     {
-        PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteKey("play_health");
+        PlayerPrefs.DeleteKey("play_time");
+        PlayerPrefs.DeleteKey("play_rolls");
         LoadPlayState(); //Instantly load the defaults
     }
 }
