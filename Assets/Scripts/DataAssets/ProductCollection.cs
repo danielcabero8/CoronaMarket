@@ -4,7 +4,7 @@ using UnityEngine;
 using RotaryHeart.Lib.SerializableDictionary;
 
 [System.Serializable]
-public class CollectionDictionary : SerializableDictionaryBase<ProductType, GameObject> {} 
+public class CollectionDictionary : SerializableDictionaryBase<ProductID, GameObject> {} 
  
 [CreateAssetMenu(fileName = "ProductCollection", menuName = "DataAssets/ProductCollection", order = 2)]
 public class ProductCollection : ScriptableObject

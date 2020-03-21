@@ -6,10 +6,10 @@ using UnityEngine;
 public class StandDataAsset : ScriptableObject
 {
     [Range(0,100)]
-    public int InfectionChance = 0;
+    public int infectionChance = 0;
 
     [Range(0,100)]
-    public int RareChance = 0;
+    public int rareChance = 0;
     
     public GameObject[] shelves;
 }

@@ -23,7 +23,8 @@ public class Stand : MonoBehaviour
             if(shelf)
             {
                 SShelfData shelfData;
-                shelfData.RareChance = standDataAsset.RareChance;
+                shelfData.infectedChance = standDataAsset.infectionChance;
+                shelfData.rareChance = standDataAsset.rareChance;
                 shelf.InitializeShelf(shelfData);
             }
         }
